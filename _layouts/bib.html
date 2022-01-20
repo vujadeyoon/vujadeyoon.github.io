@@ -117,6 +117,7 @@
             {%- else -%}
             <a href="{{ entry.award | prepend: '/assets/award/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">AWARD</a>
           {%- endif %}
+          {%- endif %}
           {%- if entry.supp %}
             {% if entry.supp contains '://' -%}
             <a href="{{ entry.supp }}" class="btn btn-sm z-depth-0" role="button">Supp</a>
