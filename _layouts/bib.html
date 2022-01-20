@@ -77,6 +77,8 @@
             {%- capture entrytype -%}<em>{{entry.journal}}</em>{%- endcapture -%}
           {%- elsif entry.type == "inproceedings" -%}
             {%- capture entrytype -%}<em>{{entry.booktitle}}</em>{{ ", " }}{%- endcapture -%}
+          {%- elsif entry.type == "masterthesis" -%}
+            {%- capture entrytype -%}<em>{{entry.school}}</em>{{ ", " }}{%- endcapture -%}
           {%- endif -%}
           {%- if entry.month -%}
             {%- capture entrymonth -%}{{ " " }}{{ entry.month | capitalize }}{{ ". " }}{%- endcapture -%}
