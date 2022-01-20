@@ -2,9 +2,9 @@
 layout: page
 title: Projects
 permalink: /projects/
-description: A growing collection of your cool projects.
+description: The page is under construction.
 nav: true
-display_categories: [work, fun]
+display_categories: [2022, 2021]
 horizontal: false
 ---
 
