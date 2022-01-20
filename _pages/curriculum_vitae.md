@@ -2,10 +2,10 @@
 layout: page
 title: Curriculum Vitae
 permalink: /curriculum_vitae/
-description: Materials for courses you taught. Replace this text with your description.
+description: Short written summary of Sung-Jun Yoon's career, qualifications and education.
 nav: true
 ---
 
-For now, this page is assumed to be a static description of your courses. You can convert it to a collection similar to `_projects/` so that you can have a dedicated page for each course.
-
-Organize your courses by years, topics, or universities, however you like!
+- Notice: If you cannot download my CV, please feel free to contact me by [email](mailto:vujadeyoon@gmail.com).
+- File: [CV_Sungjun_Yoon_220118b.pdf](/assets/cv/CV_Sungjun_Yoon_220118b.pdf).
+- Date of preparation: Jan. 18, 2022.
