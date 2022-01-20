@@ -1,72 +1,132 @@
 ---
 ---
 
-@string{aps = {American Physical Society,}}
-
-@book{einstein1956investigations,
+@inproceedings{victor2021pose,
+  title={Improving Key Human Features for Pose Transfer},
+  author={Ivan Victor-Andrei and Mistreanu Ionut and Leica Andrei and Yoon Sung-Jun and Cheon Manri and Lee Junwoo and Oh Jinsoo},
+  booktitle={IEEE International Conference on Computer Vision Workshop (ICCVW)},
+  year={2021},
+  month={October},
+  abbr={ICCVW 2021},
   bibtex_show={true},
-  title={Investigations on the Theory of the Brownian Movement},
-  author={Einstein, Albert},
-  year={1956},
-  publisher={Courier Corporation,}
+  html={https://openaccess.thecvf.com/content/ICCV2021W/AIM/html/Ivan_Improving_Key_Human_Features_for_Pose_Transfer_ICCVW_2021_paper.html},
+  selected={false},
+  abstract={It is still a great challenge in the Pose Transfer task to generate visually coherent images, to preserve the texture of clothes, to maintain the source identity and to realistically generate key human features such as the face or the hands. To tackle these challenges, we first conduct a study to obtain the most robust conditioning labels for this task and the baseline method [??] that we choose. We then improve upon the baseline by including deep source features from an Auto-encoder through an Attention mechanism. Finally we add region discriminators that are focused on key human features, thus obtaining results competitive with the state-of-the-art.},
 }
 
-@article{einstein1950meaning,
-  abbr={AJP},
+@inproceedings{manri2021iqa,
+  title={Perceptual Image Quality Assessment with Transformers},
+  author={Cheon Manri and Yoon Sung-Jun and Kang Byungyeon and Lee Junwoo},
+  booktitle={IEEE Conference on Computer Vision and Pattern Recognition Workshop (CVPRW)},
+  year={2021},
+  month={June},
+  abbr={CVPRW 2021},
   bibtex_show={true},
-  title={The meaning of relativity},
-  author={Einstein, Albert and Taub, AH},
-  journal={American Journal of Physics,},
-  volume={18},
-  number={6},
-  pages={403--404},
-  year={1950},
-  publisher={American Association of Physics Teachers,}
+  html={https://openaccess.thecvf.com/content/CVPR2021W/NTIRE/html/Cheon_Perceptual_Image_Quality_Assessment_With_Transformers_CVPRW_2021_paper.html},
+  selected={false},
+  abstract={In this paper, we propose an image quality transformer (IQT) that successfully applies a transformer architecture to a perceptual full-reference image quality assessment (IQA) task. Perceptual representation becomes more important in image quality assessment. In this context, we extract the perceptual feature representations from each of input images using a convolutional neural network (CNN) backbone. The extracted feature maps are fed into the transformer encoder and decoder in order to compare a reference and distorted images. Following an approach of the transformer-based vision models, we use extra learnable quality embedding and position embedding. The output of the transformer is passed to a prediction head in order to predict a final quality score. The experimental results show that our proposed model has an outstanding performance for the standard IQA datasets. For a large-scale IQA dataset containing output images of generative model, our model also shows the promising results. The proposed IQT was ranked first among 13 participants in the NTIRE 2021 perceptual image quality assessment challenge. Our work will be an opportunity to further expand the approach for the perceptual IQA task.},
 }
 
-@article{PhysRev.47.777,
-  abbr={PhysRev},
-  title={Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?},
-  author={Einstein, A. and Podolsky, B. and Rosen, N.},
-  abstract={In a complete theory there is an element corresponding to each element of reality. A sufficient condition for the reality of a physical quantity is the possibility of predicting it with certainty, without disturbing the system. In quantum mechanics in the case of two physical quantities described by non-commuting operators, the knowledge of one precludes the knowledge of the other. Then either (1) the description of reality given by the wave function in quantum mechanics is not complete or (2) these two quantities cannot have simultaneous reality. Consideration of the problem of making predictions concerning a system on the basis of measurements made on another system that had previously interacted with it leads to the result that if (1) is false then (2) is also false. One is thus led to conclude that the description of reality as given by a wave function is not complete.},
-  journal={Phys. Rev.,},
-  volume={47},
-  issue={10},
-  pages={777--780},
-  numpages={0},
-  year={1935},
-  month={May},
-  publisher=aps,
-  doi={10.1103/PhysRev.47.777},
-  url={http://link.aps.org/doi/10.1103/PhysRev.47.777},
-  html={https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777},
-  pdf={example_pdf.pdf},
-  selected={true}
+@inproceedings{jinjin2021iqa,
+  title={NTIRE 2021 Challenge on Perceptual Image Quality Assessment},
+  author={Cheon Manri and Yoon Sungjun and Kang Byungyeon and Lee Junwoo},
+  booktitle={IEEE Conference on Computer Vision and Pattern Recognition Workshop (CVPRW)},
+  year={2021},
+  month={June},
+  abbr={CVPRW 2021},
+  bibtex_show={true},
+  html={https://openaccess.thecvf.com/content/CVPR2021W/NTIRE/html/Gu_NTIRE_2021_Challenge_on_Perceptual_Image_Quality_Assessment_CVPRW_2021_paper.html},
+  selected={true},
+  abstract={This paper reports on the NTIRE 2021 challenge on perceptual image quality assessment (IQA), held in conjunction with the New Trends in Image Restoration and Enhancement workshop (NTIRE) workshop at CVPR 2021. As a new type of image processing technology, perceptual image processing algorithms based on Generative Adversarial Networks (GAN) have produced images with more realistic textures. These output images have completely different characteristics from traditional distortions, thus pose a new challenge for IQA methods to evaluate their visual quality. In comparison with previous IQA challenges, the training and testing datasets in this challenge include the outputs of perceptual image processing algorithms and the corresponding subjective scores. Thus they can be used to develop and evaluate IQA methods on GAN-based distortions. The challenge has 270 registered participants in total. In the final testing stage, 13 participating teams submitted their models and fact sheets. Almost all of them have achieved much better results than existing IQA methods, while the winning method can demonstrate state-of-the-art performance.},
+  award={Award_NTIRE2021.png}
 }
 
-@article{einstein1905molekularkinetischen,
-  title={{\"U}ber die von der molekularkinetischen Theorie der W{\"a}rme geforderte Bewegung von in ruhenden Fl{\"u}ssigkeiten suspendierten Teilchen},
-  author={Einstein, A.},
-  journal={Annalen der physik,},
-  volume={322},
-  number={8},
-  pages={549--560},
-  year={1905},
-  publisher={Wiley Online Library}
+@inproceedings{shanxin2020demoireing,
+  title={NTIRE 2020 Challenge on Image Demoireing: Methods and Results},
+  author={Cheon Manri and Yoon Sung-Jun and Kang Byungyeon and Lee Junwoo},
+  booktitle={IEEE Conference on Computer Vision and Pattern Recognition Workshop (CVPRW)},
+  year={2020},
+  month={June},
+  abbr={CVPRW 2020},
+  bibtex_show={true},
+  html={https://openaccess.thecvf.com/content_CVPRW_2020/html/w31/Yuan_NTIRE_2020_Challenge_on_Image_Demoireing_Methods_and_Results_CVPRW_2020_paper.html},
+  selected={true},
+  abstract={This paper reviews the Challenge on Image Demoireing that was part of the New Trends in Image Restoration and Enhancement (NTIRE) workshop, held in conjunction with CVPR 2020. Demoireing is a difficult task of removing moire patterns from an image to reveal an underlying clean image. The challenge was divided into two tracks. Track 1 targeted the single image demoireing problem, which seeks to remove moire patterns from a single image. Track 2 focused on the burst demoireing problem, where a set of degraded moire images of the same scene were provided as input, with the goal of producing a single demoired image as output. The methods were ranked in terms of their fidelity, measured using the peak signal-to-noise ratio (PSNR) between the ground truth clean images and the restored images produced by the participants' methods. The tracks had 142 and 99 registered participants, respectively, with a total of 14 and 6 submissions in the final testing stage. The entries span the current state-of-the-art in image and burst image demoireing problems.},
+  award={Award_NTIRE2020.png}
 }
 
-@article{einstein1905movement,
-  abbr={Ann. Phys.},
-  title={Un the movement of small particles suspended in statiunary liquids required by the molecular-kinetic theory 0f heat},
-  author={Einstein, A.},
-  journal={Ann. Phys.,},
-  volume={17},
-  pages={549--560},
-  year={1905}
+@article{jaeyung2019scaler,
+  title={Weighted DCT-IF for Image up Scaling},
+  author={Lee Jae-Yung and Yoon Sung-Jun and Kim Jae-Gon and Han Jong-Ki},
+  journal={KSII Transactions on Internet and Information Systems},
+  year={2019},
+  month={February},
+  volume={13},
+  issue={2},
+  pages={790--809},
+  numpages={20},
+  doi={10.3837/tiis.2019.02.017},
+  abbr={KSII TIIS},
+  bibtex_show={true},
+  html={http://www.itiis.org/digital-library/manuscript/2258},
+  selected={false},
+  abstract={The design of an efficient scaler to enhance the edge data is one of the most important issues in video signal applications, because the perceptual quality of the processed image is sensitively affected by the degradation of edge data. Various conventional scaling schemes have been proposed to enhance the edge data. In this paper, we propose an efficient scaling algorithm for this purpose. The proposed method is based on the discrete cosine transform-based interpolation filter (DCT-IF) because it outperforms other scaling algorithms in various configurations. The proposed DCT-IF incorporates weighting parameters that are optimized for training data. Simulation results show that the quality of the resized image produced by the proposed DCT-IF is much higher than that of those produced by the conventional schemes, although the proposed DCT-IF is more complex than other conventional scaling algorithms.}
 }
 
-@article{einstein1905electrodynamics,
-  title={On the electrodynamics of moving bodies},
-  author={Einstein, A.},
-  year={1905}
+@article{sungjun2018FRUC,
+  title={Hierarchical Extended Bilateral Motion Estimation based Frame Rate Up-Conversion using Learning based Linear Mapping},
+  author={Yoon* Sung-Jun and Kim* Hyun-Ho and Kim Munchurl},
+  journal={IEEE Transactions on Image Processing},
+  year={2018},
+  month={December},
+  volume={27},
+  issue={12},
+  pages={5918--5932},
+  numpages={15},
+  doi={10.1109/TIP.2018.2861567},
+  abbr={IEEE TIP},
+  bibtex_show={true},
+  html={https://ieeexplore.ieee.org/document/8423719},
+  selected={true},
+  abstract={We present a novel and effective learning-based frame rate upconversion (FRUC) scheme, using linear mapping. The proposed learning-based FRUC scheme consists of: 1) a new hierarchical extended bilateral motion estimation (HEBME) method; 2) a light-weight motion deblur (LWMD) method; and 3) a synthesis-based motion-compensated frame interpolation (S-MCFI) method. First, the HEBME method considerably enhances the accuracy of the motion estimation (ME), which can lead to a significant improvement of the FRUC performance. The proposed HEBME method consists of two ME pyramids with a three-layered hierarchy, where the motion vectors (MVs) are searched in a coarse-to-fine manner via each pyramid. The found MVs are further refined in an enhanced resolution of four times by jointly combining the MVs from the two pyramids. The HEBME method employs a new elaborate matching criterion for precise ME which effectively combines a bilateral absolute difference, an edge variance, pixel variances, and an MV difference among two consecutive blocks and its neighboring blocks. Second, the LWMD method uses the MVs found by the HEBME method and removes the small motion blurs in original frames via transformations by linear mapping. Third, the S-MCFI method finally generates interpolated frames by applying linear mapping kernels for the deblurred original frames. In consequence, our FRUC scheme is capable of precisely generating interpolated frames based on the HEBME for accurate ME, the S-MCFI for elaborate frame interpolation, and the LWMD for contrast enhancement. The experimental results show that our FRUC significantly outperforms the state-of-the-art non-deep learning-based schemes with an average of 1.42 dB higher in the peak signal-to-noise-ratio and shows comparable performance with the state-of-the-art deep learning-based scheme.<br />
+  * Sung-Jun Yoon and Hyun-Ho Kim contribute equally to the work.}
+}
+
+@masterthesis{sungjun2018thesis,
+  title={A Study on Learning-based Approaches to Video Frame Interpolation using Linear Mapping Kernels and CNN-based Nonlinear Mapping Kernels},
+  author={Yoon Sung-Jun},
+  school={Korea Advanced Institute of Science and Technology (KAIST)},
+  year={2018},
+  month={February},
+  abbr={MASTER THESIS},
+  bibtex_show={true},
+  html={http://kdrm.kaist.ac.kr/ezpdfwebviewer/ezpdf/customLayout.jsp?encdata=67D4CD8135C7372A39A4274B829ADEF3464FB94188985D30EC8EAAA96535597AE464993BE0419278598BD59B7D4A0373DBD1086053FD9E323EC684C0539E9F055B00F5FD41B0997C},
+  selected={false},
+  abstract={Frame rate up-conversion, also called video frame interpolation (VFI), is a low-level computer vision problem for generating one ore more intermediate frames between two original consecutive frames in videos. The FRUC problem has been solved for several decades by heuristic approaches, and deep-learning based FRUC has recently been studied. We propose two approaches to FRUC: (i) a learning-based direct linear mapping approach; and (ii) a kernel-based approach using a hierarchical deep convolutional neural network (CNN). We present a novel and effective learning-based FRUC scheme, using linear mapping. The proposed learning-based FRUC scheme consists of (i) a novel hierarchical extended bilateral motion estimation (HEBME) method and (ii) a synthesis-based motion-compensated frame interpolation (S-MCFI) method. We also present a kernel-based FRUC scheme based on a convolution neural network (CNN) where two sets of horizontal and vertical kernels are learned for two consecutive input frames by the proposed hierarchical CNN. The proposed learning-based FRUC scheme consists of (i) kernel estimation and (ii) shift-able local convolution for interpolating intermediate pixels. The shift-able` local convolution can yield the estimated kernels that can cover large regions that are often out of the ranges in conventional kernel-based approaches. The experimental results show that our linear mapping-based FRUC significantly outperforms the state-of-the-art schemes which are based on heuristic approaches with average 1.50 dB higher in PSNR and our hierarchical CNN-based FRUC outperforms the state-of-the-art schemes including the latest deep-learning-based FRUC scheme. Specifically, the hierarchical CNN-based FRUC scheme with our proposed shift-able local convolution can interpolate an intermediate frame with high-quality when objects in the original frames have fast motions.}
+}
+
+@inproceedings{sungjun2018FRUC,
+  title={A Study on Hierarhical CNN based Frame Rate Up-Conversion},
+  author={Yoon Sung-Jun and Kim Yongwoo and Kim Munchurl},
+  booktitle={The 30th Workshop on Image Processing and Image Understanding (IPIU)},
+  year={2018},
+  month={February},
+  abbr={KCVS},
+  bibtex_show={true},
+  html={https://www.eiric.or.kr/community/post2.php?m=view&gubun=201802&num=13799&pg=1&seGubun=&seGubun1=&SnxGubun=%B1%B8%B5%CE&searchBy=Writer&searchWord=%C0%B1%BC%BA%C1%D8},
+  selected={false},
+  abstract={In this paper, we propose a frame rate enhancement method using hierarchical convolution neural network. The convolutional neural network is constructed hierarchically, and the convolution operation is performed at the optimal position adaptively, so that the performance is robust against the interpolation of the fast moving object. As a result, compared with the existing ICCV 2017 "Video Frame Interpolation via Adaptive Separable Convolution" algorithm, the improvement was 0.41dB in terms of peak signal-to-noise ratio (PSNR).},
+  award={Award_IPIU_2018.png}
+}
+
+@inproceedings{sungjun2015scaler,
+  title={An adaptive scaler for UHD video},
+  author={Yoon Sung-Jun and Han Jong-Ki},
+  booktitle={The Korean Society Of Broad Engineers},
+  year={2015},
+  month={July},
+  abbr={KSBE},
+  bibtex_show={true},
+  html={https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE06396456&language=ko_KR&hasTopBanner=false},
+  selected={false}
 }
