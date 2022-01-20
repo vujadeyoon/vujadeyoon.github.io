@@ -29,10 +29,12 @@
               {%- endif -%}
             {%- endif -%}
             {%- assign coauthor_url = nil -%}
+            {%- assign coauthor_email = nil -%}
             {%- if site.data.coauthors[author.last] -%}
               {%- for coauthor in site.data.coauthors[author.last] -%}
                 {%- if coauthor.firstname contains author.first -%}
                   {%- assign coauthor_url = coauthor.url -%}
+                  {%- assign coauthor_email = coauthor.email -%}
                   {%- break -%}
                 {%- endif -%}
               {%- endfor -%}
@@ -108,6 +110,12 @@
             {%- else -%}
             <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
             {%- endif %}
+          {%- endif %}
+          {%- if entry.award %}
+            {% if entry.award contains '://' -%}
+            <a href="{{ entry.award }}" class="btn btn-sm z-depth-0" role="button">AWARD</a>
+            {%- else -%}
+            <a href="{{ entry.award | prepend: '/assets/award/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">AWARD</a>
           {%- endif %}
           {%- if entry.supp %}
             {% if entry.supp contains '://' -%}
