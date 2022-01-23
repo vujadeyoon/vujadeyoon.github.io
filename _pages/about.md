@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: vujadeyoon@gmail.com <br />LG Electronics. Seoul, Republic of Korea.
+subtitle: vujadeyoon@gmail.com <br />LG Electronics. Seoul, Republic of Korea (South Korea).
 
 profile:
   align: right
@@ -21,9 +21,9 @@ and letting people experiencing the machine intelligence.
 Recently, I have been in charge of developing the data plane in the Amazon Elastic Kubernetes Service (EKS) to deploy developed
 DNN model to the Amazon Web Services (AWS) cloud.
 
-I received the B.S. degree in information and communication engineering from Sejong University, Seoul, South Korea,
+I received the B.S. degree in information and communication engineering from Sejong University, Seoul, South Korea
 in 2016 and the M.S. degree in electrical engineering from the Korea Advanced Institute of Science and Technology (KAIST),
-Daejeon, South Korea, in 2018.
+Daejeon, South Korea in 2018.
 
 I read the [Originals: How Non-Conformists Move the World](https://www.adamgrant.net/book/originals) in 2017 and
 was impressed a definition of a word, `Vuja De`. The meaning of the `Vuja De` seems to indicate my role for research.
