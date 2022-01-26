@@ -111,7 +111,7 @@ You can check the whole Dockerfile in the [7-2. Dockerfile](#dockerfile).
 
 <hr>
 
-## 6. preparations to build a Dockerfile <a name="docker_preparations"></a>
+## 6. Preparations to build a Dockerfile <a name="docker_preparations"></a>
 1. Directory structure
 ```bash
 .
