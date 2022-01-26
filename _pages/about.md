@@ -15,7 +15,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I am a research engineer at LG Electronics, working on computer vision and machine learning.
+I am an applied research scientist at LG Electronics, working on computer vision and machine learning.
 My research interests are training a deep neural network (DNN) model for human-centric learning and computational photography
 and letting people experiencing the machine intelligence.
 Recently, I have been in charge of developing the data plane in the Amazon Elastic Kubernetes Service (EKS) to deploy developed
