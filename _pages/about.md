@@ -16,8 +16,8 @@ social: true  # includes social icons at the bottom of the page
 ---
 
 I am an applied research scientist at LG Electronics, working on computer vision and machine learning.
-My research interests are training a deep neural network (DNN) model for human-centric learning and computational photography
-and letting people experiencing the machine intelligence.
+My research interests are training a deep neural network (DNN) model for human-centric learning and computational photography,
+and letting people experience the machine intelligence.
 Recently, I have been in charge of developing the data plane in the Amazon Elastic Kubernetes Service (EKS) to deploy developed
 DNN model to the Amazon Web Services (AWS) cloud.
 
