@@ -1,0 +1,16 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: vujade-cluster
+  region: ap-northeast-2
+managedNodeGroups:
+  - name: ng-dl
+    instanceType: g4dn.xlarge
+    minSize: 1
+    maxSize: 5
+    desiredCapacity: 1
+    volumeSize: 80
+    privateNetworking: true
+    ssh:
+      allow: true
+      publicKeyName: vujade-eks

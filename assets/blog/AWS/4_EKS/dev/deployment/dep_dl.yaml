@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+        name: dep-dl
+        namespace: ns-vujade
+spec:
+        replicas: 3
+        selector:
+                matchLabels:
+                        app: eks-dl
+        template:
+                metadata:
+                        name: pod-eks-dl
+                        labels:
+                                app: eks-dl
+                spec:
+                        nodeSelector:
+                                alpha.eksctl.io/nodegroup-name: ng-dl
+                        containers:
+                        - name: eks-dl
+                          image: 123456789123.dkr.ecr.ap-northeast-2.amazonaws.com/eks-dl:released
+                          imagePullPolicy: Always
+                          env:
+                          - name: PYTHONUNBUFFERED
+                            value: "1"
+                          securityContext:
+                            privileged: true
+                          ports:
+                          - containerPort: 11001
+                          resources:
+                                  requests:
+                                          cpu: 950m
+                                  limits:
+                                          cpu: 1000m
+                          lifecycle:
+                                  preStop:
+                                          exec:
+                                                  command: ["/bin/sh", "-c", "curl -X POST http://127.0.0.1:11001/stop"]
