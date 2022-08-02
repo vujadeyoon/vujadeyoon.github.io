@@ -16,7 +16,8 @@ If you like the theme, give it a star!
 
 
 ## Notice
-- This repository is officially forked from the [adl-folio](https://github.com/alshedivat/al-folio) with commit, 0c2e6574c9bcf500d445aec456ba57739b17e713.
+- This repository is officially forked from the [adl-folio](https://github.com/alshedivat/al-folio).
+  - The commit number: 0c2e6574c9bcf500d445aec456ba57739b17e713.
 - Please note that this repository has unfortunately been separated from the official repository, [adl-folio](https://github.com/alshedivat/al-folio),
   in order to make a private repository for a custom host [[Stack Overflow](https://stackoverflow.com/questions/28744980/github-pages-for-private-repository)].
 - Vujadeyoon respects the work of the [al-folio](https://github.com/alshedivat/al-folio).
