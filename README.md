@@ -21,6 +21,7 @@ If you like the theme, give it a star!
 - Please note that this repository has unfortunately been separated from the official repository, [adl-folio](https://github.com/alshedivat/al-folio),
   in order to make a private repository for a custom host [[Stack Overflow](https://stackoverflow.com/questions/28744980/github-pages-for-private-repository)].
 - Vujadeyoon respects the work of the [al-folio](https://github.com/alshedivat/al-folio).
+- This repository must be public and the GitHub Pages site must be built from the gh-pages branch, not master branch.
 
 
 ## User community
