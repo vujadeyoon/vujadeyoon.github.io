@@ -6,9 +6,8 @@ subtitle: vujadeyoon@gmail.com <br />LG Electronics. Seoul, Republic of Korea (S
 
 profile:
   align: right
-  image: /profile/sjyoon_pyconKR_2018.png
+  image: /profile/sjyoon_portrait_2023.png
   address: >
-    <p>At the PYCON KOREA 2018</p>
 
 news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
