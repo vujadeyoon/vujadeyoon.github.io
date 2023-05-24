@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>        
+    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sungjun  Yoon | Amazon Virtual Private Cloud (VPC)</title>
+    <meta name="author" content="Sungjun  Yoon" />
+    <meta name="description" content="The configurations of the Amazon VPC for Amazon Elastic Kubernetes Service (EKS)" />
+    <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website" />
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://gitcdn.link/repo/jwarby/jekyll-pygments-themes/master/github.css" />
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="/assets/ico/github.ico"/>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://vujadeyoon.github.io/blog/2022/vpc/">
+
+    <!-- Dark Mode -->
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav">
+
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="https://vujadeyoon.github.io/"><span class="font-weight-bold">Sungjun</span>   Yoon</a>
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+
+              <!-- About -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/">Main</a>
+              </li>
+              
+              <!-- Blog -->
+              <li class="nav-item active">
+                <a class="nav-link" href="/blog/">Blog</a>
+              </li>
+
+              <!-- Other pages -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/curriculum_vitae/">Curriculum Vitae</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/projects/">Projects</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/publications/">Publications</a>
+              </li>
+
+              <!-- Toogle theme mode -->
+              <div class="toggle-container">
+                <a id="light-toggle">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                </a>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Content -->
+    <div class="container mt-5">
+      <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Amazon Virtual Private Cloud (VPC)</h1>
+    <p class="post-meta">January 26, 2022</p>
+    <p class="post-tags">
+      <a href="/blog/2022"> <i class="fas fa-calendar fa-sm"></i> 2022 </a>
+        ·  
+        <a href="/blog/tag/aws,">
+          <i class="fas fa-hashtag fa-sm"></i> aws,</a>  
+          <a href="/blog/tag/network">
+          <i class="fas fa-hashtag fa-sm"></i> network</a>  
+          
+        ·  
+        <a href="/blog/category/software">
+          <i class="fas fa-tag fa-sm"></i> software</a>  
+          
+
+    </p>
+  </header>
+
+  <article class="post-content">
+    <h2 id="table-of-contents">Table of contents</h2>
+<ol>
+  <li><a href="#notice">Notice</a></li>
+  <li><a href="#amazon_vpc">What is Amazon VPC?</a></li>
+  <li><a href="#region">AWS region</a></li>
+  <li><a href="#vpc">How to create a VPC</a></li>
+  <li><a href="#subnet">How to set up subnets</a></li>
+  <li><a href="#internet_gateway">How to set up an internet gateway</a></li>
+  <li><a href="#route_table_ig">How to set up a route table for the internet gateway</a></li>
+  <li><a href="#elastic_ip">How to allocate an elastic IP address</a></li>
+  <li><a href="#nat">How to set up a NAT gateway</a></li>
+  <li><a href="#route_table_nat">How to set up a route table for the NAT gateway</a></li>
+  <li><a href="#ref">Reference</a></li>
+</ol>
+
+<hr>
+
+<h2 id="1-notice-">1. Notice <a name="notice"></a>
+</h2>
+<ul>
+  <li>A guide for setting the Amazon Virtual Private Cloud (Amazon VPC)</li>
+  <li>The name of region is Asia Pacific (Seoul) and the corresponding code is ap-northeast-2 [1].</li>
+  <li>I refer to the Amazon VPC as VPC.</li>
+  <li>I recommend that you should ignore the commented instructions with an octothorpe, #.</li>
+  <li>I recommend that you should fill in the appropriate letters between the parentheses, &lt;&gt;.</li>
+</ul>
+
+<hr>
+
+<h2 id="2-what-is-amazon-vpc-">2. What is Amazon VPC? <a name="amazon_vpc"></a>
+</h2>
+<p>Amazon VPC enables you to launch Amazon Web Services resources into a virtual network you’ve defined. This virtual network
+resembles a traditional network that you’d operate in your own data center, with the benefits of using the scalable
+infrastructure of AWS [2]. You can check the Amazon VPC in details on the
+<a href="https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/vpc-tkv.html" target="_blank" rel="noopener noreferrer">Amazon Virtual Private Cloud (VPC)</a> [2].</p>
+
+<p>Among the components of the VPC [3], we should set up the following components for the
+<a href="https://aws.amazon.com/eks" target="_blank" rel="noopener noreferrer">Amazon Elastic Kubernetes Service (EKS)</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">No.</th>
+      <th style="text-align: center">Component</th>
+      <th style="text-align: center">Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center"><a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html" target="_blank" rel="noopener noreferrer">Virtual private cloud (VPC) [3]</a></td>
+      <td style="text-align: center">A virtual network dedicated to your AWS account.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center"><a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html" target="_blank" rel="noopener noreferrer">Subnet</a></td>
+      <td style="text-align: center">A range of IP addresses in your VPC.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center"><a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html" target="_blank" rel="noopener noreferrer">Route table</a></td>
+      <td style="text-align: center">A set of rules, called routes, that are used to determine where network traffic is directed.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center"><a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html" target="_blank" rel="noopener noreferrer">Internet gateway</a></td>
+      <td style="text-align: center">A gateway that you attach to your VPC to enable communication between resources in your VPC and the internet.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center"><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html" target="_blank" rel="noopener noreferrer">Elastic IP</a></td>
+      <td style="text-align: center">An Elastic IP address is a static IPv4 address designed for dynamic cloud computing.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center"><a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html" target="_blank" rel="noopener noreferrer">NAT gateway</a></td>
+      <td style="text-align: center">A managed AWS service that allows Amazon Elastic Compute Cloud (EC2) instances in private subnets to connect to the internet, other VPCs, or on-premises networks.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2 id="3-aws-region-">3. AWS region <a name="region"></a>
+</h2>
+<p>As far as I mentioned in the Section <a href="#notice">1. Notice</a>, please note that the region and corresponding code are as follows:</p>
+<ul>
+  <li>Region: Asia Pacific (Seoul)</li>
+  <li>Code: ap-northeast-2</li>
+</ul>
+
+<p>You can find more information about the regions and zones on the <a href="#https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html" target="_blank" rel="noopener noreferrer">Regions and Zones [1]</a>.</p>
+
+<hr>
+
+<h2 id="4-how-to-create-a-vpc-">4. How to create a VPC <a name="vpc"></a>
+</h2>
+<p>You can create a VPC on the <a href="https://ap-northeast-2.console.aws.amazon.com/vpc/home?region=ap-northeast-2#vpcs:" target="_blank" rel="noopener noreferrer">Your VPCs</a> as shown in Fig. 1. 
+You can define the name of VPC that will be created at the <code class="language-plaintext highlighter-rouge">Name tag - optional</code>. When you type text in the <code class="language-plaintext highlighter-rouge">Name tag - optional</code>,
+the <code class="language-plaintext highlighter-rouge">Value - optional</code> field will automatically be filled with the same text. In this case,
+I use the <code class="language-plaintext highlighter-rouge">Name tag - optional</code> and <code class="language-plaintext highlighter-rouge">IPv4 CIDR</code> for the created VPC as Vujade_VPC and 10.172.0.0/16, respectively.</p>
+
+<p>Please note that you can add additional tag for the older version of the cluster [4] as follows. In this case, the tag is not required
+because the considered version of the cluster is 2.21.</p>
+<ul>
+  <li>Key: kubernetes.io/cluster/<em>&lt;cluster-name&gt;</em>
+</li>
+  <li>Value: shared</li>
+</ul>
+
+<div class="row mt-30">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/1_VPC/fig_1-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/1_VPC/fig_1-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/1_VPC/fig_1-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/1_VPC/fig_1.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Fig. 1. Create a VPC.
+</div>
+
+<hr>
+
+<h2 id="5-how-to-set-up-subnets-">5. How to set up subnets <a name="subnet"></a>
+</h2>
+
+<p>I recommend you should create public and private subnets. Please note that the data plane and management plane of
+the Amazon EKS are on the private subnets. Before proceeding with how to set up subnets, I would like to point out two
+important things:</p>
+<ul>
+  <li>Amazon EC2 instance type in availability zone</li>
+  <li>Tagging for load balancers or ingress controllers in the Amazon EKS</li>
+</ul>
+
+<p>Some availability zones do not support particular instance types. Thus, if you receive the error “Your requested instance
+type is not supported in your requested Availability Zone”, you should determine which availability zones support your
+instance type [5]. In this case, a g4dn.xlarge instance is supported in ap-northeast-2a and ap-northeast-2c.</p>
+<ul>
+  <li>EC2 instance type: g4dn.xlarge</li>
+  <li>Region: Asia Pacific (Seoul), ap-northeast-2</li>
+  <li>Availability zone: A and C</li>
+</ul>
+
+<p>Please note that you should create a new tag if you hope to use load balancers or ingress controllers in the Amazon EKS [6].
+In other words, the key and value for the tag are as follows:</p>
+<ul>
+  <li>key: kubernetes.io/role/internal-elb</li>
+  <li>value: 1</li>
+</ul>
+
+<p>Fig 2 shows configurations for creating public subnet and private subnets for the data and management plane.
+Please note that subnets for the data plane have additional tag that is mentioned above.</p>
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/2_Subnet/fig_2_a-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/2_Subnet/fig_2_a-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/2_Subnet/fig_2_a-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/2_Subnet/fig_2_a.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/2_Subnet/fig_2_b-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/2_Subnet/fig_2_b-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/2_Subnet/fig_2_b-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/2_Subnet/fig_2_b.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/2_Subnet/fig_2_c-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/2_Subnet/fig_2_c-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/2_Subnet/fig_2_c-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/2_Subnet/fig_2_c.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Fig. 2. Configurations for public and private subnets.
+</div>
+
+<p>The entire subnet configurations are as follows:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">No.</th>
+      <th style="text-align: center">Kinds</th>
+      <th style="text-align: center">VPC ID</th>
+      <th style="text-align: center">Subnet name</th>
+      <th style="text-align: center">Availability Zone</th>
+      <th style="text-align: center">IPv4 CIDR block</th>
+      <th style="text-align: center">Tags</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">Public</td>
+      <td style="text-align: center">vpc-000d67a73829a5e11 (Vujade_VPC)</td>
+      <td style="text-align: center">Vujade_public_a</td>
+      <td style="text-align: center">Asia Pacific (Seoul) / ap-northeast-2a</td>
+      <td style="text-align: center">10.172.96.128/26</td>
+      <td style="text-align: center">Name: Vujade_public_a</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">Public</td>
+      <td style="text-align: center">vpc-000d67a73829a5e11 (Vujade_VPC)</td>
+      <td style="text-align: center">Vujade_public_b</td>
+      <td style="text-align: center">Asia Pacific (Seoul) / ap-northeast-2b</td>
+      <td style="text-align: center">10.172.96.192/26</td>
+      <td style="text-align: center">Name: Vujade_public_b</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">Public</td>
+      <td style="text-align: center">vpc-000d67a73829a5e11 (Vujade_VPC)</td>
+      <td style="text-align: center">Vujade_public_c</td>
+      <td style="text-align: center">Asia Pacific (Seoul) / ap-northeast-2c</td>
+      <td style="text-align: center">10.172.98.0/26</td>
+      <td style="text-align: center">Name: Vujade_public_c</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">Private (Data plane)</td>
+      <td style="text-align: center">vpc-000d67a73829a5e11 (Vujade_VPC)</td>
+      <td style="text-align: center">Vujade_EKS_data_plane_a</td>
+      <td style="text-align: center">Asia Pacific (Seoul) / ap-northeast-2a</td>
+      <td style="text-align: center">10.172.92.0/23</td>
+      <td style="text-align: center">Name: Vujade_EKS_data_plane_a; kubernetes.io/role/internal-elb: 1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">Private (Data plane)</td>
+      <td style="text-align: center">vpc-000d67a73829a5e11 (Vujade_VPC)</td>
+      <td style="text-align: center">Vujade_EKS_data_plane_c</td>
+      <td style="text-align: center">Asia Pacific (Seoul) / ap-northeast-2c</td>
+      <td style="text-align: center">10.172.94.0/23</td>
+      <td style="text-align: center">Name: Vujade_EKS_data_plane_c; kubernetes.io/role/internal-elb: 1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">Private (Management plane)</td>
+      <td style="text-align: center">vpc-000d67a73829a5e11 (Vujade_VPC)</td>
+      <td style="text-align: center">Vujade_EKS_management_plane_a</td>
+      <td style="text-align: center">Asia Pacific (Seoul) / ap-northeast-2a</td>
+      <td style="text-align: center">10.172.96.0/27</td>
+      <td style="text-align: center">Name: Vujade_EKS_management_plane_a</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">Private (Management plane)</td>
+      <td style="text-align: center">vpc-000d67a73829a5e11 (Vujade_VPC)</td>
+      <td style="text-align: center">Vujade_EKS_management_plane_b</td>
+      <td style="text-align: center">Asia Pacific (Seoul) / ap-northeast-2b</td>
+      <td style="text-align: center">10.172.96.32/27</td>
+      <td style="text-align: center">Name: Vujade_EKS_management_plane_b</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">Private (Management plane)</td>
+      <td style="text-align: center">vpc-000d67a73829a5e11 (Vujade_VPC)</td>
+      <td style="text-align: center">Vujade_EKS_management_plane_c</td>
+      <td style="text-align: center">Asia Pacific (Seoul) / ap-northeast-2c</td>
+      <td style="text-align: center">10.172.96.64/27</td>
+      <td style="text-align: center">Name: Vujade_EKS_management_plane_c</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2 id="6-how-to-set-up-an-internet-gateway-">6. How to set up an internet gateway <a name="internet_gateway"></a>
+</h2>
+
+<p>You should create an internet gateway for public subnets as shown in Fig. 3.
+Please note that you should attach the created internet gateway to the corresponding VPC.</p>
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/3_InternetGateway/fig_3_a-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/3_InternetGateway/fig_3_a-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/3_InternetGateway/fig_3_a-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/3_InternetGateway/fig_3_a.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/3_InternetGateway/fig_3_b-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/3_InternetGateway/fig_3_b-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/3_InternetGateway/fig_3_b-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/3_InternetGateway/fig_3_b.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/3_InternetGateway/fig_3_c-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/3_InternetGateway/fig_3_c-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/3_InternetGateway/fig_3_c-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/3_InternetGateway/fig_3_c.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Fig. 3. How to set up an internet gateway.
+</div>
+
+<hr>
+
+<h2 id="7-how-to-set-up-a-route-table-for-the-internet-gateway-">7. How to set up a route table for the internet gateway <a name="route_table_ig"></a>
+</h2>
+
+<p>Please note that you should set up two route tables for an internet gateway and a Network Address Translation (NAT)
+gateway which corresponds to public and private subnets, respectively.
+In this section, I introduce how to set up a route table for the created internet gateway. The way to install a route
+table for the NAT gateway is addressed in the <a href="#route_table_nat">Section 10. How to set up a route table for the NAT gateway</a>.</p>
+
+<p>Fig. 4 shows how to set up a route table for the internet gateway. You should edit route tables and subnet associations
+after creating the route table.</p>
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/4_RouteTable_IG/fig_4_a-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/4_RouteTable_IG/fig_4_a-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/4_RouteTable_IG/fig_4_a-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/4_RouteTable_IG/fig_4_a.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/4_RouteTable_IG/fig_4_b-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/4_RouteTable_IG/fig_4_b-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/4_RouteTable_IG/fig_4_b-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/4_RouteTable_IG/fig_4_b.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/4_RouteTable_IG/fig_4_c-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/4_RouteTable_IG/fig_4_c-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/4_RouteTable_IG/fig_4_c-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/4_RouteTable_IG/fig_4_c.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Fig. 4. How to set up a route table for the internet gateway.
+</div>
+
+<h2 id="8-how-to-allocate-an-elastic-ip-address-">8. How to allocate an elastic IP address <a name="elastic_ip"></a>
+</h2>
+
+<p>You should allocate an elastic IP address that is required when creating a NAT gateway in the <a href="#route_table_nat">Section 10. How to set up a route table for the NAT gateway</a>.
+I recommend that you should modify the name of the allocated elastic IP address after getting the elastic IP address as shown in Fig. 5.</p>
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/5_ElasticIP/fig_5_a-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/5_ElasticIP/fig_5_a-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/5_ElasticIP/fig_5_a-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/5_ElasticIP/fig_5_a.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/5_ElasticIP/fig_5_b-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/5_ElasticIP/fig_5_b-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/5_ElasticIP/fig_5_b-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/5_ElasticIP/fig_5_b.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Fig. 5. How to allocate an elastic IP address.
+</div>
+
+<hr>
+
+<h2 id="9-how-to-set-up-a-nat-gateway-">9. How to set up a NAT gateway <a name="nat"></a>
+</h2>
+
+<p>You can easily set up a NAT gateway as shown in Fig. 6. I recommend that you should set a subnet and an elastic IP allocation ID to the created resources.
+Especially, the recommend subnet is a public subnet in the availability zone A.</p>
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/6_NAT/fig_6_a-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/6_NAT/fig_6_a-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/6_NAT/fig_6_a-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/6_NAT/fig_6_a.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Fig. 6. How to set up a NAT gateway.
+</div>
+
+<hr>
+
+<h2 id="10-how-to-set-up-a-route-table-for-the-nat-gateway-">10. How to set up a route table for the NAT gateway <a name="route_table_nat"></a>
+</h2>
+
+<p>A route table for the NAT gateway has been already created. Thus, you can first find the created route table for the NAT gateway with
+the name of the VPC field. After finding the created route table, you can change the name of the route table and should
+edit route table as shown in Fig. 7.</p>
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/7_RouteTable_NAT/fig_7_a-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/7_RouteTable_NAT/fig_7_a-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/7_RouteTable_NAT/fig_7_a-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/7_RouteTable_NAT/fig_7_a.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/blog/AWS/2_VPC/7_RouteTable_NAT/fig_7_b-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/blog/AWS/2_VPC/7_RouteTable_NAT/fig_7_b-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/blog/AWS/2_VPC/7_RouteTable_NAT/fig_7_b-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/blog/AWS/2_VPC/7_RouteTable_NAT/fig_7_b.png" data-zoomable="">
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Fig. 7. How to set up a route table for the NAT gateway.
+</div>
+
+<hr>
+
+<h2 id="11-reference-">11. Reference <a name="ref"></a>
+</h2>
+<ol>
+  <li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html" title="Regions and Zones" target="_blank" rel="noopener noreferrer"> Regions and Zones</a></li>
+  <li><a href="https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/vpc-tkv.html" title="Amazon Virtual Private Cloud (VPC)" target="_blank" rel="noopener noreferrer"> Amazon Virtual Private Cloud (VPC)</a></li>
+  <li><a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html" title="What is Amazon VPC?" target="_blank" rel="noopener noreferrer"> What is Amazon VPC?</a></li>
+  <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html" title="Cluster VPC and subnet considerations - Subnet tagging" target="_blank" rel="noopener noreferrer"> Cluster VPC and subnet considerations - Subnet tagging</a></li>
+  <li><a href="https://aws.amazon.com/premiumsupport/knowledge-center/ec2-instance-type-not-supported-az-error" title="Why am I receiving the error, Your requested instance type is not supported in your requested Availability Zone, when launching an EC2 instance?" target="_blank" rel="noopener noreferrer"> Why am I receiving the error, Your requested instance type is not supported in your requested Availability Zone, when launching an EC2 instance?</a></li>
+  <li><a href="https://aws.amazon.com/premiumsupport/knowledge-center/eks-vpc-subnet-discovery" title="How can I tag the Amazon VPC subnets in my Amazon EKS cluster for automatic subnet discovery by load balancers or ingress controllers?" target="_blank" rel="noopener noreferrer"> How can I tag the Amazon VPC subnets in my Amazon EKS cluster for automatic subnet discovery by load balancers or ingress controllers?</a></li>
+</ol>
+
+<hr>
+
+
+  </article><div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname  = 'vujadeyoon';
+      var disqus_identifier = '/blog/2022/vpc';
+      var disqus_title      = "Amazon Virtual Private Cloud (VPC)";
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" target="_blank" rel="noopener noreferrer">comments powered by Disqus.</a>
+</noscript>
+
+</div>
+
+    </div>
+
+    <!-- Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        © Copyright 2023 <a href="https://vujadeyoon.github.io" target="_blank">Sungjun Yoon</a>. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a>.
+
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" integrity="sha256-l/1pMF/+J4TThfgARS6KwWrk/egwuVvhRzfLAMQ6Ds4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    <!-- Mansory & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/assets/js/mansory.js" type="text/javascript"></script>
+    
+  <!-- Medium Zoom JS -->
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="/assets/js/zoom.js"></script><!-- Load Common JS -->
+  <script src="/assets/js/common.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    
+  </body>
+</html>
+
